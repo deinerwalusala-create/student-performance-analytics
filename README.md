@@ -188,6 +188,10 @@ The repository includes example charts generated from the supplied student datas
 
 ![Students by risk level](outputs/figures/risk_levels.png)
 
+### Risk Level Breakdown
+
+![Risk level breakdown for students](students%20by%20risk%20level.png)
+
 ## Project Structure
 
 ```text
