@@ -1,368 +1,186 @@
-import pandas as pd
-import matplotlib.pyplot as plt
-
-
-from src.visualization import (
-    score_distribution,
-    department_performance,
-    attendance_vs_score,
-    performance_levels
-)
-
-from src.statistics import (
-    detect_at_risk_students,
-    identify_risk_reason,
-    add_risk_level
-)
-
-from src.load_data import load_student_data
-from src.clean_data import clean_student_data
+import argparse
+from pathlib import Path
 
 from src.analysis import (
+    attendance_analysis,
+    average_subject_scores,
     calculate_average_scores,
     classify_students,
     department_analysis,
+    department_statistics,
     gender_analysis,
-    attendance_analysis,
+    gender_statistics,
+    performance_summary,
+    score_range,
     study_hours_analysis,
     top_students,
-    lowest_students,
-    performance_summary,
-    average_subject_scores,
-    score_range,
-    department_statistics,
-    gender_statistics
+)
+from src.clean_data import clean_student_data
+from src.load_data import load_student_data
+from src.report import generate_client_report
+from src.statistics import (
+    add_risk_level,
+    detect_at_risk_students,
+    identify_risk_reason,
+)
+from src.visualization import (
+    attendance_vs_score,
+    department_performance,
+    performance_levels,
+    risk_level_chart,
+    score_distribution,
 )
 
 
-# --------------------------------
-# 1. LOAD DATA
-# --------------------------------
+def print_section(title):
+    print(f"\n{'=' * 62}\n{title}\n{'=' * 62} - main.py:36")
 
-df = load_student_data()
 
-print("\n============================== - main.py:44")
-print("STUDENT PERFORMANCE ANALYTICS - main.py:45")
-print("============================== - main.py:46")
+def run_analysis(input_path, output_dir, top_n=5, show_plots=True):
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    figure_dir = output_dir / "figures"
 
-print("\nOriginal Data: - main.py:48")
-print(df.head())
+    print_section("STUDENT PERFORMANCE ANALYTICS")
+    print(f"Input: {input_path} - main.py:45")
 
+    df = load_student_data(input_path)
+    print(f"Loaded {len(df)} student records. - main.py:48")
 
-# --------------------------------
-# 2. CLEAN DATA
-# --------------------------------
+    df = clean_student_data(df)
+    df = calculate_average_scores(df)
+    df = classify_students(df)
+    print(f"Clean records: {len(df)} - main.py:53")
 
-df = clean_student_data(df)
-
-print("\nData after cleaning: - main.py:58")
-print(df.head())
-
-
-# --------------------------------
-# 3. CALCULATE AVERAGE SCORES
-# --------------------------------
-
-df = calculate_average_scores(df)
-
-
-# --------------------------------
-# 4. CLASSIFY STUDENTS
-# --------------------------------
-
-df = classify_students(df)
-
-
-# --------------------------------
-# 5. DISPLAY STUDENT RESULTS
-# --------------------------------
-
-print("\nStudent Performance: - main.py:80")
-
-print(
-    df[
-        [
-            "Student_ID",
-            "Name",
-            "Average_Score",
-            "Performance_Level"
-        ]
-    ]
-)
-
-
-# --------------------------------
-# 6. DEPARTMENT ANALYSIS
-# --------------------------------
-
-print("\nDepartment Performance: - main.py:98")
-
-department_result = department_analysis(df)
-
-print(department_result)
-
-
-# --------------------------------
-# 7. GENDER ANALYSIS
-# --------------------------------
-
-print("\nGender Performance: - main.py:109")
-
-gender_result = gender_analysis(df)
-
-print(gender_result)
-
-
-# --------------------------------
-# 8. ATTENDANCE CORRELATION
-# --------------------------------
-
-correlation = attendance_analysis(df)
-
-print("\nAttendance vs Average Score Correlation: - main.py:122")
-
-print(round(correlation, 2))
-
-
-# --------------------------------
-# 9. TOP STUDENTS
-# --------------------------------
-
-print("\nTop 5 Students: - main.py:131")
-
-top = top_students(df)
-
-print(
-    top[
-        [
-            "Student_ID",
-            "Name",
-            "Average_Score",
-            "Performance_Level"
-        ]
-    ]
-)
-
-
-# --------------------------------
-# 10. SAVE RESULTS
-# --------------------------------
-
-df.to_csv(
-    "outputs/student_performance_results.csv",
-    index=False
-)
-
-print("\nResults saved successfully! - main.py:156")
-
-# --------------------------------
-# 11. DATA VISUALIZATION
-# --------------------------------
-
-print("\nGenerating visualizations... - main.py:162")
-
-score_distribution(df)
-
-department_performance(df)
-
-attendance_vs_score(df)
-
-performance_levels(df)
-
-
-
-# --------------------------------
-# 12. DEEPER DATA ANALYSIS
-# --------------------------------
-
-print("\n============================== - main.py:178")
-print("DEEPER DATA ANALYSIS - main.py:179")
-print("============================== - main.py:180")
-
-
-# --------------------------------
-# STUDY HOURS VS PERFORMANCE
-# --------------------------------
-
-study_correlation = study_hours_analysis(df)
-
-print("\nStudy Hours vs Average Score Correlation: - main.py:189")
-
-print(round(study_correlation, 2))
-
-
-# --------------------------------
-# ATTENDANCE VS PERFORMANCE
-# --------------------------------
-
-attendance_correlation = attendance_analysis(df)
-
-print("\nAttendance vs Average Score Correlation: - main.py:200")
-
-print(round(attendance_correlation, 2))
-
-
-# --------------------------------
-# PERFORMANCE SUMMARY
-# --------------------------------
-
-print("\nPerformance Level Summary: - main.py:209")
-
-print(performance_summary(df))
-
-
-# --------------------------------
-# AVERAGE SUBJECT SCORES
-# --------------------------------
-
-print("\nAverage Scores by Assessment: - main.py:218")
-
-subject_scores = average_subject_scores(df)
-
-for subject, score in subject_scores.items():
-
+    print_section("PERFORMANCE SNAPSHOT")
     print(
-        f"{subject}: {score:.2f}"
+        df[
+            ["Student_ID", "Name", "Average_Score", "Performance_Level"]
+        ].to_string(index=False)
     )
 
+    print("\nDepartment performance: - main.py:62")
+    print(department_analysis(df).round(2))
 
-# --------------------------------
-# TOP STUDENTS
-# --------------------------------
+    print("\nGender performance: - main.py:65")
+    print(gender_analysis(df).round(2))
 
-print("\nTop 5 Students: - main.py:233")
+    print(f"\nAttendance correlation: {attendance_analysis(df):.2f} - main.py:68")
 
-top_students_result = top_students(
-    df,
-    5
-)
+    print(f"\nTop {top_n} students: - main.py:70")
+    print(
+        top_students(df, top_n)[
+            ["Student_ID", "Name", "Average_Score", "Performance_Level"]
+        ].to_string(index=False)
+    )
 
-print(
-    top_students_result[
-        [
-            "Student_ID",
-            "Name",
-            "Average_Score",
-            "Performance_Level"
-        ]
-    ].to_string(index=False)
-)
+    results_path = output_dir / "student_performance_results.csv"
+    df.to_csv(results_path, index=False)
 
+    print_section("DEEPER INSIGHTS")
+    print(f"Study hours correlation: {study_hours_analysis(df):.2f} - main.py:81")
+    print(f"Attendance correlation: {attendance_analysis(df):.2f} - main.py:82")
+    print("\nPerformance summary: - main.py:83")
+    print(performance_summary(df))
 
-# --------------------------------
-# SCORE RANGE
-# --------------------------------
+    print("\nAverage assessment scores: - main.py:86")
+    for subject, score in average_subject_scores(df).items():
+        print(f"{subject}: {score:.2f} - main.py:88")
 
-print("\nScore Range: - main.py:256")
+    highest, lowest, difference = score_range(df)
+    print(f"\nScore range: {lowest:.2f} to {highest:.2f} ({difference:.2f} points) - main.py:91")
 
-highest, lowest, difference = score_range(df)
+    print("\nDepartment statistics: - main.py:93")
+    print(department_statistics(df).round(2))
+    print("\nGender statistics: - main.py:95")
+    print(gender_statistics(df).round(2))
 
-print(
-    f"Highest Score: {highest:.2f}"
-)
+    print_section("AT-RISK STUDENT DETECTION")
+    df = add_risk_level(df)
+    df["Risk_Reason"] = df.apply(identify_risk_reason, axis=1)
+    at_risk_students = detect_at_risk_students(df)
 
-print(
-    f"Lowest Score: {lowest:.2f}"
-)
+    print(
+        at_risk_students[
+            [
+                "Student_ID",
+                "Name",
+                "Average_Score",
+                "Attendance",
+                "Study_Hours",
+                "Risk_Level",
+                "Risk_Reason",
+            ]
+        ].to_string(index=False)
+    )
 
-print(
-    f"Score Difference: {difference:.2f}"
-)
+    print("\nRisk level summary: - main.py:117")
+    risk_level_column = "Risk_" + "Level"
+    print(df[risk_level_column].value_counts())
 
+    risk_results_path = output_dir / "student_performance_with_risk.csv"
+    df.to_csv(risk_results_path, index=False)
 
-# --------------------------------
-# DEPARTMENT STATISTICS
-# --------------------------------
+    print_section("GENERATING PROJECT ASSETS")
+    charts = [
+        (score_distribution, "score_distribution.png"),
+        (department_performance, "department_performance.png"),
+        (attendance_vs_score, "attendance_vs_score.png"),
+        (performance_levels, "performance_levels.png"),
+        (risk_level_chart, "risk_levels.png"),
+    ]
 
-print("\nDepartment Statistics: - main.py:277")
+    for chart, filename in charts:
+        chart(df, figure_dir / filename, show=show_plots)
 
-department_result = department_statistics(df)
+    report_path, summary_path = generate_client_report(
+        df,
+        output_dir / "dashboard.html",
+        figure_dir,
+        top_n,
+    )
 
-print(
-    department_result.round(2)
-)
-
-
-# --------------------------------
-# GENDER STATISTICS
-# --------------------------------
-
-print("\nGender Statistics: - main.py:290")
-
-gender_result = gender_statistics(df)
-
-print(
-    gender_result.round(2)
-)
-
-
-# --------------------------------
-# 12. AT-RISK STUDENT DETECTION
-# --------------------------------
-
-print("\n============================== - main.py:303")
-print("ATRISK STUDENT DETECTION - main.py:304")
-print("============================== - main.py:305")
-
-
-# Add risk levels
-
-df = add_risk_level(df)
-
-
-# Identify risk reasons
-
-df["Risk_Reason"] = df.apply(
-    identify_risk_reason,
-    axis=1
-)
+    print(f"Results saved to: {results_path} - main.py:143")
+    print(f"Risk analysis saved to: {risk_results_path} - main.py:144")
+    print(f"Charts saved to: {figure_dir} - main.py:145")
+    print(f"Client dashboard saved to: {report_path} - main.py:146")
+    print(f"Executive summary saved to: {summary_path} - main.py:147")
+    return df
 
 
-# Detect at-risk students
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Generate student performance insights and visual assets."
+    )
+    parser.add_argument(
+        "--input",
+        default="data/students.csv",
+        help="Path to the input CSV file.",
+    )
+    parser.add_argument(
+        "--output-dir",
+        default="outputs",
+        help="Directory for CSV reports and chart images.",
+    )
+    parser.add_argument(
+        "--top",
+        type=int,
+        default=5,
+        help="Number of top students to display.",
+    )
+    parser.add_argument(
+        "--no-show",
+        action="store_true",
+        help="Save charts without opening visualization windows.",
+    )
+    return parser.parse_args()
 
-at_risk_students = detect_at_risk_students(df)
 
-
-# Display at-risk students
-
-print("\nStudents Requiring Academic Attention: - main.py:328")
-
-print(
-    at_risk_students[
-        [
-            "Student_ID",
-            "Name",
-            "Average_Score",
-            "Attendance",
-            "Study_Hours",
-            "Risk_Level",
-            "Risk_Reason"
-        ]
-    ].to_string(index=False)
-)
-
-
-# --------------------------------
-# RISK LEVEL SUMMARY
-# --------------------------------
-
-print("\n============================== - main.py:349")
-print("RISK LEVEL SUMMARY - main.py:350")
-print("============================== - main.py:351")
-
-risk_summary = df["Risk_Level"].value_counts()
-
-print("\nNumber of Students in Each Risk Level: - main.py:355")
-
-print(risk_summary)
-
-# --------------------------------
-# SAVE RISK ANALYSIS
-# --------------------------------
-
-df.to_csv(
-    "outputs/student_performance_with_risk.csv",
-    index=False
-)
-
-print("\nRisk analysis saved successfully! - main.py:368")
+if __name__ == "__main__":
+    arguments = parse_args()
+    run_analysis(
+        input_path=arguments.input,
+        output_dir=arguments.output_dir,
+        top_n=arguments.top,
+        show_plots=not arguments.no_show,
+    )

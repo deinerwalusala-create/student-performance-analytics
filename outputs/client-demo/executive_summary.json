@@ -1,0 +1,54 @@
+{
+  "generated_at": "2026-09-24T11:32:15.955815+00:00",
+  "students_analyzed": 15,
+  "average_score": 76.8,
+  "average_attendance": 82.47,
+  "average_study_hours": 11.87,
+  "attendance_correlation": 0.988,
+  "study_hours_correlation": 0.991,
+  "high_risk_students": 2,
+  "medium_risk_students": 1,
+  "performance_levels": {
+    "Excellent": 6,
+    "Good": 5,
+    "Average": 3,
+    "Needs Improvement": 1
+  },
+  "department_average_scores": {
+    "Computer Science": 85.79,
+    "Information Technology": 66.52
+  },
+  "top_students": [
+    {
+      "student_id": "S004",
+      "name": "Ann",
+      "average_score": 93.33
+    },
+    {
+      "student_id": "S012",
+      "name": "Lucy",
+      "average_score": 92.0
+    },
+    {
+      "student_id": "S008",
+      "name": "Linda",
+      "average_score": 90.0
+    },
+    {
+      "student_id": "S002",
+      "name": "Mary",
+      "average_score": 87.67
+    },
+    {
+      "student_id": "S006",
+      "name": "Sarah",
+      "average_score": 84.67
+    }
+  ],
+  "recommendations": [
+    "Prioritize a weekly support plan for 2 high-risk student(s), starting with attendance, study habits, and assessment recovery.",
+    "Set an early-warning check-in for 1 medium-risk student(s) before the next assessment cycle.",
+    "Review midterm support materials because it is the lowest average assessment area in this dataset.",
+    "Compare teaching practices and student support coverage in Information Technology, the lowest-performing department in this sample."
+  ]
+}

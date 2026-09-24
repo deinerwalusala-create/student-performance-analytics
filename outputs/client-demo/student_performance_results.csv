@@ -1,0 +1,16 @@
+Student_ID,Name,Gender,Age,Study_Hours,Attendance,Assignments,Midterm,Final,Department,Average_Score,Performance_Level
+S001,John,Male,20.0,12.0,85.0,78.0,72.0,80.0,Computer Science,76.66666666666667,Good
+S002,Mary,Female,21.0,15.0,92.0,88.0,85.0,90.0,Computer Science,87.66666666666667,Excellent
+S003,Peter,Male,19.0,8.0,70.0,65.0,60.0,62.0,Information Technology,62.333333333333336,Average
+S004,Ann,Female,22.0,18.0,96.0,94.0,91.0,95.0,Computer Science,93.33333333333333,Excellent
+S005,David,Male,20.0,10.0,78.0,72.0,68.0,70.0,Information Technology,70.0,Good
+S006,Sarah,Female,21.0,14.0,89.0,85.0,82.0,87.0,Computer Science,84.66666666666667,Excellent
+S007,James,Male,23.0,6.0,65.0,58.0,55.0,60.0,Information Technology,57.666666666666664,Needs Improvement
+S008,Linda,Female,20.0,16.0,94.0,90.0,88.0,92.0,Computer Science,90.0,Excellent
+S009,Brian,Male,22.0,11.0,82.0,76.0,74.0,78.0,Information Technology,76.0,Good
+S010,Grace,Female,19.0,13.0,87.0,84.0,79.0,85.0,Computer Science,82.66666666666667,Excellent
+S011,Kevin,Male,21.0,9.0,75.0,68.0,64.0,69.0,Information Technology,67.0,Average
+S012,Lucy,Female,22.0,17.0,91.0,93.0,89.0,94.0,Computer Science,92.0,Excellent
+S013,Mark,Male,20.0,7.0,68.0,61.0,57.0,63.0,Information Technology,60.333333333333336,Average
+S014,Jane,Female,21.0,12.0,86.0,80.0,76.0,82.0,Computer Science,79.33333333333333,Good
+S015,Tom,Male,23.0,10.0,79.0,73.0,70.0,74.0,Information Technology,72.33333333333333,Good

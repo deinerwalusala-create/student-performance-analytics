@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Performance Intelligence Report</title>
+<style>
+:root { --ink: #17212b; --muted: #60707d; --line: #d9e3e8; --paper: #f5f8f7; --teal: #007f78; --gold: #e5a93d; --coral: #d8664c; }
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: var(--paper); font-family: Georgia, 'Times New Roman', serif; }
+.shell { max-width: 1180px; margin: 0 auto; padding: 38px 24px 70px; }
+.hero { background: var(--ink); color: white; padding: 42px; border-radius: 8px; position: relative; overflow: hidden; }
+.hero:after { content: ''; position: absolute; width: 260px; height: 260px; right: -80px; top: -100px; border: 42px solid var(--teal); border-radius: 50%; opacity: .8; }
+.eyebrow { color: #a8d8d2; font: 700 12px/1.2 Arial, sans-serif; letter-spacing: 2px; text-transform: uppercase; }
+h1 { max-width: 680px; margin: 14px 0 10px; font-size: clamp(36px, 6vw, 68px); line-height: .98; font-weight: 500; }
+.subtitle { max-width: 620px; color: #d5e0e5; font: 16px/1.6 Arial, sans-serif; }
+.meta { margin-top: 28px; color: #aabac2; font: 12px Arial, sans-serif; }
+h2 { margin: 46px 0 16px; font-size: 28px; font-weight: 500; }
+.metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px; }
+.metric-card, .panel { background: white; border: 1px solid var(--line); border-radius: 6px; padding: 22px; }
+.metric-label, .metric-detail { color: var(--muted); font: 12px Arial, sans-serif; }
+.metric-label { margin: 0 0 14px; text-transform: uppercase; letter-spacing: 1px; }
+.metric-value { margin: 0; color: var(--teal); font-size: 36px; }
+.metric-detail { margin: 10px 0 0; }
+.grid-two { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.data-table { width: 100%; border-collapse: collapse; font: 14px Arial, sans-serif; }
+.data-table th, .data-table td { border-bottom: 1px solid var(--line); padding: 11px 8px; text-align: left; }
+.data-table th { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .8px; }
+.recommendations { padding-left: 22px; font: 15px/1.7 Arial, sans-serif; }
+.recommendations li { margin: 8px 0; }
+.chart-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+figure { margin: 0; padding: 12px; background: white; border: 1px solid var(--line); border-radius: 6px; }
+figure img { display: block; width: 100%; height: auto; }
+figcaption { padding: 12px 4px 4px; color: var(--muted); font: 12px Arial, sans-serif; text-transform: uppercase; letter-spacing: .8px; }
+.footer { margin-top: 46px; color: var(--muted); font: 12px/1.6 Arial, sans-serif; border-top: 1px solid var(--line); padding-top: 18px; }
+@media (max-width: 760px) { .shell { padding: 20px 14px 50px; } .hero { padding: 28px 22px; } .metrics, .grid-two, .chart-grid { grid-template-columns: 1fr; } h1 { font-size: 44px; } }
+</style>
+</head>
+<body>
+<main class="shell">
+<section class="hero">
+<p class="eyebrow">Executive intelligence report</p>
+<h1>Student performance, made actionable.</h1>
+<p class="subtitle">A decision-ready view of achievement, engagement, and intervention opportunities across the student dataset.</p>
+<p class="meta">Generated September 24, 2026 at 14:39 &middot; 15 students analyzed</p>
+</section>
+<section class="metrics">
+<article class="metric-card"><p class="metric-label">Average score</p><p class="metric-value">76.8</p><p class="metric-detail">out of 100</p></article>
+<article class="metric-card"><p class="metric-label">Average attendance</p><p class="metric-value">82.5%</p><p class="metric-detail">engagement signal</p></article>
+<article class="metric-card"><p class="metric-label">High-risk students</p><p class="metric-value">2</p><p class="metric-detail">priority intervention</p></article>
+<article class="metric-card"><p class="metric-label">Study-hour correlation</p><p class="metric-value">0.99</p><p class="metric-detail">with average score</p></article>
+</section>
+<h2>What leaders should know</h2>
+<section class="grid-two">
+<article class="panel"><h3>Recommended actions</h3><ul class="recommendations"><li>Prioritize a weekly support plan for 2 high-risk student(s), starting with attendance, study habits, and assessment recovery.</li><li>Set an early-warning check-in for 1 medium-risk student(s) before the next assessment cycle.</li><li>Review midterm support materials because it is the lowest average assessment area in this dataset.</li><li>Compare teaching practices and student support coverage in Information Technology, the lowest-performing department in this sample.</li></ul></article>
+<article class="panel"><h3>Top performers</h3><table class="data-table"><thead><tr><th>ID</th><th>Student</th><th>Score</th></tr></thead><tbody><tr><td>S004</td><td>Ann</td><td>93.3</td></tr><tr><td>S012</td><td>Lucy</td><td>92.0</td></tr><tr><td>S008</td><td>Linda</td><td>90.0</td></tr><tr><td>S002</td><td>Mary</td><td>87.7</td></tr><tr><td>S006</td><td>Sarah</td><td>84.7</td></tr></tbody></table></article>
+</section>
+<h2>Performance by department</h2>
+<section class="panel"><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Average Score</th>
+    </tr>
+    <tr>
+      <th>Department</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Computer Science</th>
+      <td>85.79</td>
+    </tr>
+    <tr>
+      <th>Information Technology</th>
+      <td>66.52</td>
+    </tr>
+  </tbody>
+</table></section>
+<h2>Students needing attention</h2>
+<section class="panel"><table class="dataframe data-table">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Student_ID</th>
+      <th>Name</th>
+      <th>Average_Score</th>
+      <th>Attendance</th>
+      <th>Study_Hours</th>
+      <th>Risk_Level</th>
+      <th>Risk_Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>S003</td>
+      <td>Peter</td>
+      <td>62.3</td>
+      <td>70.0</td>
+      <td>8.0</td>
+      <td>Medium Risk</td>
+      <td>Low Attendance</td>
+    </tr>
+    <tr>
+      <td>S007</td>
+      <td>James</td>
+      <td>57.7</td>
+      <td>65.0</td>
+      <td>6.0</td>
+      <td>High Risk</td>
+      <td>Low Academic Score, Low Attendance, Low Study Hours</td>
+    </tr>
+    <tr>
+      <td>S013</td>
+      <td>Mark</td>
+      <td>60.3</td>
+      <td>68.0</td>
+      <td>7.0</td>
+      <td>High Risk</td>
+      <td>Low Attendance, Low Study Hours</td>
+    </tr>
+  </tbody>
+</table></section>
+<h2>Visual evidence</h2>
+<section class="chart-grid"><figure><img src="figures/score_distribution.png" alt="Score distribution"><figcaption>Score distribution</figcaption></figure><figure><img src="figures/department_performance.png" alt="Department performance"><figcaption>Department performance</figcaption></figure><figure><img src="figures/attendance_vs_score.png" alt="Attendance versus score"><figcaption>Attendance versus score</figcaption></figure><figure><img src="figures/performance_levels.png" alt="Performance levels"><figcaption>Performance levels</figcaption></figure><figure><img src="figures/risk_levels.png" alt="Risk levels"><figcaption>Risk levels</figcaption></figure></section>
+<footer class="footer">Methodology: average score is calculated from Assignments, Midterm, and Final. Risk flags use score, attendance, and study-hour thresholds defined in the project source. Correlation indicates association, not causation.</footer>
+</main>
+</body>
+</html>
