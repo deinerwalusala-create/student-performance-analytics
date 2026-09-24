@@ -1,0 +1,16 @@
+Student_ID,Name,Gender,Age,Study_Hours,Attendance,Assignments,Midterm,Final,Department
+S001,John,Male,20,12,85,78,72,80,Computer Science
+S002,Mary,Female,21,15,92,88,85,90,Computer Science
+S003,Peter,Male,19,8,70,65,60,62,Information Technology
+S004,Ann,Female,22,18,96,94,91,95,Computer Science
+S005,David,Male,20,10,78,72,68,70,Information Technology
+S006,Sarah,Female,21,14,89,85,82,87,Computer Science
+S007,James,Male,23,6,65,58,55,60,Information Technology
+S008,Linda,Female,20,16,94,90,88,92,Computer Science
+S009,Brian,Male,22,11,82,76,74,78,Information Technology
+S010,Grace,Female,19,13,87,84,79,85,Computer Science
+S011,Kevin,Male,21,9,75,68,64,69,Information Technology
+S012,Lucy,Female,22,17,91,93,89,94,Computer Science
+S013,Mark,Male,20,7,68,61,57,63,Information Technology
+S014,Jane,Female,21,12,86,80,76,82,Computer Science
+S015,Tom,Male,23,10,79,73,70,74,Information Technology
