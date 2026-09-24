@@ -128,7 +128,27 @@ The script creates these files in `outputs/`:
 - `student_performance_results.csv`: cleaned records with average scores and performance levels.
 - `student_performance_with_risk.csv`: the enriched results with risk levels and risk reasons.
 
-The charts are currently displayed with `matplotlib` and are not saved as image files.
+The charts are displayed with `matplotlib` during execution. The current script does not automatically save new chart image files; the repository includes the example images below.
+
+## Visualizations
+
+The repository includes example charts generated from the supplied student dataset.
+
+### Score Distribution
+
+![Distribution of student average scores](Figure_1.png)
+
+### Average Performance by Department
+
+![Average performance by department](Average%20perfomance%20by%20department.png)
+
+### Attendance Versus Student Performance
+
+![Attendance versus student performance](Attendance%20vs%20student%20performance.png)
+
+### Student Performance Levels
+
+![Student performance levels](student%20py%20perfomance%20level.png)
 
 ## Project Structure
 
