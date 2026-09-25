@@ -1,0 +1,13 @@
+Insight 1: The overall average student score is 76.80, indicating moderate academic performance.
+
+Insight 2: Study hours have a strong positive relationship with average score (correlation = 0.99).
+
+Insight 3: Attendance has a strong positive relationship with average score (correlation = 0.99).
+
+Insight 4: Computer Science has the highest average score in the dataset at 85.79.
+
+Insight 5: The highest-performing student is Ann with an average score of 93.33.
+
+Insight 6: 3 out of 15 students (20.0%) are classified as medium or high risk.
+
+Insight 7: The most common performance category is 'Excellent', containing 6 students.
